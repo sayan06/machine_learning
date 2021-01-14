@@ -4,7 +4,7 @@ from numpy import genfromtxt
 import matplotlib.pyplot as plt
 import numpy as np
 
-distanceData = genfromtxt('Salary_Data.csv', delimiter=',')
+distanceData = genfromtxt('conversion.csv', delimiter=',')
 # print(distanceData)
 inputX = distanceData[:,0]
 inputy = distanceData[:,1]
@@ -47,16 +47,16 @@ def minimize(weightsNew, weightsPrev, learningRate):
 
 weights = [0, -1]
 weightsMinimized = minimize(weights, weights, .1)
-print(weightsMinimized)
+print(minimizedWeights)
 
     
-def my_formula(x):
-    return weightsMinimized[0]+weightsMinimized[1]*x
+def plotRegression(x):
+    return minimizedWeights[0]+minimizedWeights[1]*x
 
-regressionline = np.array(range(-5,60)) 
+regressionLine = np.array(range(-5,60)) 
 plt.scatter(inputX,inputy, c = "red",alpha=.9, marker = 'o')
 plt.axis([0, 100, 0, 100])
-plt.plot(regressionline,my_formula(regressionline))
+plt.plot(regressionLine,plotRegression(regressionLine))
 plt.xlabel('X')
 plt.ylabel('Y')
 plt.show()
