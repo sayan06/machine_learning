@@ -32,8 +32,8 @@ def minimize(weightsNew, weightsPrev, learningRate):
     print(getCost(weightsPrev, inputX, inputy))
     
     iterations = 0
-    
-    while True:
+    keepIterating = True
+    while keepIterating:
         weightsPrev = weightsNew
         w0 = weightsPrev[0] - learningRate * \
             getGradient(weightsPrev, inputX, inputy)[0]
@@ -43,10 +43,15 @@ def minimize(weightsNew, weightsPrev, learningRate):
     
         print(weightsNew)
         print(getCost(weightsNew, inputX, inputy))
-    
-        if (weightsNew[0] - weightsPrev[0])** 2 + (weightsNew[1] - weightsPrev[1])** 2 <= pow(10, -6):
-            print('reached a low weight diff')
+        
+        if ( getCost(weightsPrev, inputX, inputy) - getCost(weightsNew, inputX, inputy)) <= pow(10, -2):
+            print('reached a  weight diff')
+            # keepIterating = False
             return weightsNew
+
+        # if (weightsNew[0] - weightsPrev[0])** 2 + (weightsNew[1] - weightsPrev[1])** 2 <= pow(10, -6):
+        #     print('reached a low weight diff')
+        #     return weightsNew
         if iterations > 500:
             print('reached a 500 iterations')
             return weightsNew
@@ -54,12 +59,12 @@ def minimize(weightsNew, weightsPrev, learningRate):
 
 
 weights = [0, -1]
-weightsMinimized = minimize(weights, weights, .001)
-print(minimizedWeights)
+weightsMinimized = minimize(weights, weights, .0001)
+print(weightsMinimized)
 
 
 def plotRegression(x):
-    return minimizedWeights[0]+minimizedWeights[1]*x
+    return weightsMinimized[0]+weightsMinimized[1]*x
 
 
 regressionLine = numpy.array(range(-5, 60))
