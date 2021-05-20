@@ -3,7 +3,7 @@ import math
 import numpy as numpy
 from numpy import genfromtxt
 import matplotlib.pyplot as plt
-import scipy
+
 
 distanceData = genfromtxt('conversion.csv', delimiter=',')
 
